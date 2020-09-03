@@ -1,0 +1,24 @@
+.header {
+    width: 100%;
+    height: 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 24px;
+    background-color: #0e1d22;
+
+    h2 {
+        color: #fff;
+    }
+
+    ul {
+        list-style: none;
+        display: flex;
+
+        li {
+            &:last-child {
+                margin-left: 24px;
+            }
+        }
+    }
+}

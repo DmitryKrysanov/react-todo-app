@@ -1,0 +1,20 @@
+.todo {
+    width: 100%;
+
+    .todo_inner {
+        display: grid;
+        grid-template-columns: 2fr 10fr;
+        column-gap: 24px;
+        padding: 24px;
+
+        .todo_aside {
+
+        }
+
+        .todo_content {
+
+        }
+    }
+
+}
+

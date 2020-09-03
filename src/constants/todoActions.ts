@@ -1,0 +1,11 @@
+export const GET_TODOS = 'GET_TODOS';
+export const GET_TODOS_ERROR = 'GET_TODOS_ERROR';
+export const ADD_TODO = 'ADD_TODO';
+export const ADD_TODO_ERROR = 'ADD_TODO_ERROR';
+export const TODO_IS_DONE = 'TODO_IS_DONE';
+export const TODO_IS_DONE_ERROR = 'TODO_IS_DONE_ERROR';
+export const TODO_IS_IMPORTANT = 'TODO_IS_IMPORTANT';
+export const TODO_IS_IMPORTANT_ERROR = 'TODO_IS_IMPORTANT_ERROR';
+export const DELETE_TODO = 'DELETE_TODO';
+export const DELETE_TODO_ERROR = 'DELETE_TODO_ERROR';
+export const RESET_TODOS = 'RESET_TODOS';
