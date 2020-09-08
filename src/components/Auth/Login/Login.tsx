@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useForm } from "react-hook-form";
+import React, { Component } from 'react';
 import classes from './Login.module.scss';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -9,60 +8,60 @@ interface ConnectedProps {
     auth: any;
 }
 
-interface IFormInput {
-    email: string;
-    password: string;
-}
-
 type ComponentProps = ConnectedProps & ReturnType<typeof mapDispatchToProps>;
 
-const Login = (props: ComponentProps) => {
+class Login extends Component<ComponentProps> {
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const { register, handleSubmit, errors } = useForm<IFormInput>();
-
-    const handleEmailChange = (event: { currentTarget: { value: React.SetStateAction<string>; }; }) => {
-        setEmail(event.currentTarget.value)
+    public state = {
+        email: '',
+        password: '',
     }
 
-    const handlePasswordChange = (event: { currentTarget: { value: React.SetStateAction<string>; }; }) => {
-        setPassword(event.currentTarget.value)
+    public handleEmailChange = (event: { currentTarget: { value: any; }; }) => {
+        this.setState({
+            email: event.currentTarget.value,
+        })
     }
 
-    const onSubmit = (data: IFormInput) => {
-        props.logIn(data.email, data.password)
+    public handlePasswordChange = (event: { currentTarget: { value: any; }; }) => {
+        this.setState({
+            password: event.currentTarget.value,
+        })
     }
 
+    public onSubmit = (event: { preventDefault: () => void; } ) => {
+        event.preventDefault();
+        this.props.logIn(this.state.email, this.state.password);
+    }
+    render() {
     return (
-        <div className={classes.login}>
+        <div className={ classes.login }>
             <h1>Log In</h1>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div className={classes.input}>
+            <form onSubmit={ this.onSubmit }>
+                <div className={ classes.input }>
                     <input
                         name="email"
                         className='input'
                         id="email"
                         placeholder="Email"
-                        type="text"
-                        onChange={handleEmailChange}
-                        value={email}
-                        ref={register({ required: true })}
+                        type="email"
+                        onChange={ this.handleEmailChange }
+                        value={ this.state.email }
+             
                     />
-                    <small className="error_message">{errors.email && "Email is required"}</small>
+                    {/* <small className="error_message">{errors.email && "Email is required"}</small> */}
                 </div>
-                <div className={classes.input}>
+                <div className={ classes.input }>
                     <input
                         name="password"
                         className='input'
                         id="password"
                         placeholder="Password"
                         type="password"
-                        onChange={handlePasswordChange}
-                        value={password}
-                        ref={register({ required: true })}
+                        onChange={ this.handlePasswordChange }
+                        value={ this.state.password }
                     />
-                    <small className="error_message">{errors.password && "Password is required"}</small>
+                    {/* <small className="error_message">{errors.password && "Password is required"}</small> */}
                 </div>
                 <button
                     className='btn btn__primary'
@@ -70,11 +69,12 @@ const Login = (props: ComponentProps) => {
                 >
                     Log In
                 </button>
-                <p className="error_message">{props.auth.error}</p>
+                { this.props.auth.error ? <p className="error_message">{this.props.auth.error}</p> : null }
             </form>
-            {props.auth.uid ? <Redirect to='/' /> : null}
+            {this.props.auth.uid ? <Redirect to='/' /> : null}
         </div>
     );
+}
 }
 
 const mapStateToProps = (state: any) => {
