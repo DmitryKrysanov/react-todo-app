@@ -6,7 +6,7 @@ import Auth from './components/Auth/Auth';
 
 function App() {
   return (
-    <div className="App" data-test="App">
+    <div className="app">
       <Switch>
         <Route path="/" exact component={ Todo }/>
         <Route path="/auth/:method" exact component={ Auth }/>
