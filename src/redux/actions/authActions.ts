@@ -76,7 +76,6 @@ export const signUp = (newUser: any) => {
         db.collection('users').doc(resp.user.uid).set({
           firstName: newUser.firstName,
           lastName: newUser.lastName,
-          initials: newUser.firstName[0] + newUser.lastName[0]
         })
         const token = await resp.user.getIdTokenResult(true)
           .then((idToken: any) => idToken.token);

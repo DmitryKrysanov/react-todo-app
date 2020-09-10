@@ -6,6 +6,7 @@ import classes from './Todo.module.scss';
 import { connect } from 'react-redux';
 import { addTodo, getTodos } from '../../redux/actions/todoActions';
 import { Redirect } from 'react-router-dom';
+import { getUser } from '../../redux/actions/userActions';
 
 export interface INewTodo {
     title: string,
@@ -30,7 +31,8 @@ export interface ITodo {
 const Todo = (props: any): JSX.Element => {
 
     useEffect(() => {
-        props.getTodos()
+        props.getTodos();
+        props.getUser();
     }, [])
 
         return (
@@ -66,6 +68,9 @@ const mapDispatchToProps = (dispatch: any) => ({
     },
     getTodos: () => {
         return dispatch(getTodos())
+    },
+    getUser: () => {
+        return dispatch(getUser())
     }
 });
 
