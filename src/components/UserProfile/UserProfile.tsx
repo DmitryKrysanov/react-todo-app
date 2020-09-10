@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import classes from './UserProfile.module.scss';
 import Header from '../Header/Header';
+import { connect } from 'react-redux';
+import { getUser } from '../../redux/actions/userActions';
 
-class UserProfile extends Component {
-
-    state = {
-        img: "",
-        // img: "https://placehold.it/80",
-        firstName: "Dima",
-        lastName: "Krysanov",
+interface ConnectedProps {
+    user: {
+        img: string,
+        firstName: string,
+        lastName: string,
     }
+}
+
+type ComponentProps = ConnectedProps;
+
+class UserProfile extends Component<ComponentProps> {
 
     render() {
         return (
@@ -21,14 +26,14 @@ class UserProfile extends Component {
                     <div
                         className={classes.profile_img}
                     >
-                        {this.state.img
-                            ? <img src={this.state.img} alt="avatar" />
+                        {this.props.user.img
+                            ? <img src={this.props.user.img} alt="avatar" />
                             : <div className={classes.img_placeholder}>
-                                <h1>{this.state.firstName[0] + this.state.lastName[0]}</h1>
+                                <h1>{this.props.user.firstName[0] + this.props.user.lastName[0]}</h1>
                             </div>}
 
                     </div>
-                    <p><strong>{`${this.state.firstName} ${this.state.lastName}`}</strong></p>
+                    <p><strong>{`${this.props.user.firstName} ${this.props.user.lastName}`}</strong></p>
                     <button
                         className='btn btn__secondary'
                     >
@@ -41,4 +46,10 @@ class UserProfile extends Component {
     }
 };
 
-export default UserProfile;
+const mapStateToProps = (state: any) => {
+    return {
+        user: state.user.user
+    }
+}
+
+export default connect(mapStateToProps)(UserProfile);
