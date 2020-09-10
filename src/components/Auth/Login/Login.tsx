@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classes from './Login.module.scss';
 import { Redirect } from 'react-router-dom';
-import { Form, Field } from 'react-final-form'
+import { Form, Field } from 'react-final-form';
 import { connect } from 'react-redux';
 import { logIn } from '../../../redux/actions/authActions';
 
@@ -18,8 +18,8 @@ type ComponentProps = ConnectedProps & ReturnType<typeof mapDispatchToProps>;
 
 class Login extends Component<ComponentProps> {
 
-    public handleFormSubmit = (value: LoginForm) => {
-        this.props.logIn(value.email, value.password);
+    public handleFormSubmit = (data: LoginForm) => {
+        this.props.logIn(data.email, data.password);
     }
     render() {
         return (
