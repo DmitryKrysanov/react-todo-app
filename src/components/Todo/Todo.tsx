@@ -42,7 +42,7 @@ const Todo = (props: any): JSX.Element => {
                 <div className={ classes.todo_inner }>
                     <div className={ classes.todo_content }>
                         <NewTodo 
-                            addTodo={ props.add_todo } 
+                            addTodo={ props.addTodo } 
                         />
                         <TodoList 
                             todos={ props.todos } 
