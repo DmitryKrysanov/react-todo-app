@@ -2,10 +2,17 @@ import React, { useState } from 'react';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import classes from './IsAuth.module.scss';
+import { withRouter } from 'react-router-dom';
 
 interface Props {
-    logOut: () => void
-    resetTodos: () => void
+    logOut: () => void,
+    resetTodos: () => void,
+
+    location: any,
+    history: any,
+    match: any,
+    staticContext: any
+
 }
 
 const IsAuth = (props: Props) => {
@@ -14,11 +21,11 @@ const IsAuth = (props: Props) => {
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const handleMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
     };
 
-    const handleClose = () => {
+    const handleMenuClose = () => {
         setAnchorEl(null);
     };
 
@@ -27,11 +34,15 @@ const IsAuth = (props: Props) => {
         props.resetTodos();
     }
 
+    const onProfile = () => {
+        props.history.push('profile')
+    }
+
     return (
         <nav>
             <ul>
                 <li>
-                    <button className="btn" onClick={handleClick}>
+                    <button className="btn" onClick={ handleMenuClick }>
                         <img className={ classes.avatar } src={ avatarPlaceholder } alt="user menu" />
                     </button>
                     <Menu
@@ -39,9 +50,9 @@ const IsAuth = (props: Props) => {
                         anchorEl={ anchorEl }
                         keepMounted
                         open={ Boolean(anchorEl) }
-                        onClose={ handleClose }
+                        onClose={ handleMenuClose }
                     >
-                        <MenuItem onClick={ handleClose }>Profile</MenuItem>
+                        <MenuItem onClick={ onProfile }>Profile</MenuItem>
                         <MenuItem onClick={ onLogOut }>Logout</MenuItem>
                     </Menu>
                 </li>
@@ -50,4 +61,4 @@ const IsAuth = (props: Props) => {
     )
 }
 
-export default IsAuth;
+export default withRouter(IsAuth);
