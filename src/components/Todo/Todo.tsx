@@ -6,7 +6,6 @@ import classes from './Todo.module.scss';
 import { connect } from 'react-redux';
 import { addTodo, getTodos } from '../../redux/actions/todoActions';
 import { Redirect } from 'react-router-dom';
-import Profile from '../Profile/Profile';
 
 export interface INewTodo {
     title: string,
@@ -34,20 +33,11 @@ const Todo = (props: any): JSX.Element => {
         props.getTodos()
     }, [])
 
-    const user = {
-        img: "https://placehold.it/80",
-        firstName: "Dima",
-        lastName: "Krysanov",
-    }
-
         return (
-            <div className={ classes.todo } data-test="Todo">
+            <div className={ classes.todo }>
                 { !props.auth.uid ? <Redirect to='/auth/login'/> : null }
                 <Header />
                 <div className={ classes.todo_inner }>
-                    <div className={ classes.todo_aside }>
-                        <Profile user={user}/>
-                    </div>
                     <div className={ classes.todo_content }>
                         <NewTodo 
                             addTodo={ props.add_todo } 

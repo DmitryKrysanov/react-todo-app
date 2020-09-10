@@ -2,9 +2,7 @@
     width: 100%;
 
     .todo_inner {
-        display: grid;
-        grid-template-columns: 2fr 10fr;
-        column-gap: 24px;
+        width: 100%;
         padding: 24px;
 
         .todo_aside {
